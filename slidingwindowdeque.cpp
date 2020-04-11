@@ -1,21 +1,17 @@
 #include<iostream>
 using namespace std;
 #include<deque>
-#define ll long long
-
-// 8 passed
-
 
 int main(){
 
-ll int a[10000005],n,k;
+long int a[100005],n,k;
 cin>>n;
-for(ll int i=0;i<n;i++){
+for(int i=0;i<n;i++){
     cin>>a[i];
 }
 cin>>k;
-ll int i;
-deque<ll int> q;
+int i;
+deque<int> q;
 for(i=0;i<k;i++){
     while(!q.empty() && a[i]>=a[q.front()]){
         q.pop_front();
