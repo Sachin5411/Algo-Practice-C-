@@ -8,7 +8,7 @@ void heapify(vector<int> &heap,int index){
         return;
     }
     int parent=(index-1)/2;
-    if(heap[parent]<heap[index]){
+    if(heap[parent]<=heap[index]){
         swap(heap[parent],heap[index]);
         heapify(heap,parent);
     }
