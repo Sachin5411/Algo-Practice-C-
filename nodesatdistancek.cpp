@@ -1,8 +1,10 @@
 #include<iostream>
 using namespace std;
 #include<queue>
+#include<set>
+#include<algorithm>
+#include<vector>
 
-//ERROR
 
 class node{
 public:
@@ -40,7 +42,8 @@ node* createtree(int*in,int *pre,int s,int e){
 }
 
 
-queue<int> result;
+vector<int> result;
+//set<int> result
 
 void find(node*root,int k){
     if(root==NULL || k<0){
@@ -48,8 +51,8 @@ void find(node*root,int k){
     }
     //int i=0;
     if(k==0){
-        cout<<root->data<<" ";
-        //result.push(root->data);
+        //cout<<root->data<<" ";
+        result.push_back(root->data);
         return;
     }
     find(root->left,k-1);
@@ -63,16 +66,16 @@ int findnode(node*root,int k,int target){
         return -1;
     }
     if(root->data==target){
-        find(root->left,k);
-        find(root->right,k);
+        find(root,k);
+        //find(root->right,k);
         return 0;
 
     }
     int l=findnode(root->left,k,target);
     if(l!=-1){
         if(l+1==k){
-            cout<<root->data<<" ";
-            //result.push(root->data);
+            //cout<<root->data<<" ";
+            result.push_back(root->data);
         }
         //find(root->left,k-l-1,0);
         find(root->right,k-l-2);
@@ -81,8 +84,8 @@ int findnode(node*root,int k,int target){
     int r=findnode(root->right,k,target);
     if(r!=-1){
         if(r+1==k){
-            cout<<root->data<<" ";
-            //result.push(root->data);
+            //cout<<root->data<<" ";
+            result.push_back(root->data);
         }
         find(root->left,k-r-2);
         //find(root->right,k-r-1,0);
@@ -110,10 +113,19 @@ cin>>t;
 while(t--){
     cin>>target>>k;
     findnode(root,k,target);
+    if(result.size()==0){
+        cout<<"0";
+    }
+    sort(result.begin(), result.end());
+
+    for(int i=0;i<result.size();i++){
+        cout<<result[i]<<" ";
+    }
    /* while(!result.empty()){
         cout<<result.front()<<" ";
         result.pop();
     }*/
+    result.clear();
     cout<<endl;
 }
 
